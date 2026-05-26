@@ -32,10 +32,10 @@ Clone this repository into your Codex skills directory, or copy the `agent-pulse
 git clone https://github.com/Jane-o-O-o-O/agent-pulse-skills.git
 ```
 
-The skill expects `agent-pulse` to be installed or importable from a local checkout.
+The skill expects the `agentpulse-cli` Python package to be installed, which provides the `agent-pulse` command.
 
 ```powershell
-pip install agent-pulse
+pip install agentpulse-cli
 ```
 
 If you are developing from a local Agent Pulse checkout:
@@ -43,6 +43,12 @@ If you are developing from a local Agent Pulse checkout:
 ```powershell
 cd path\to\agent-pulse
 pip install -e .
+```
+
+After installation, the command to run is still:
+
+```powershell
+agent-pulse --version
 ```
 
 ## Example Prompts

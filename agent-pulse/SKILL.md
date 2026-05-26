@@ -7,7 +7,7 @@ description: Use Agent Pulse to inspect AI agent activity, token usage, tool cal
 
 ## Purpose
 
-Use the installed `agent-pulse` CLI as the source of truth for local AI-agent activity. Prefer running commands and summarizing their output over reading the Agent Pulse source code.
+Use the installed `agent-pulse` CLI as the source of truth for local AI-agent activity. The PyPI package is `agentpulse-cli`, while the command remains `agent-pulse`. Prefer running commands and summarizing their output over reading the Agent Pulse source code.
 
 Always enable UTF-8 on Windows before running commands because Agent Pulse output contains emoji and box drawing:
 
@@ -16,7 +16,11 @@ $env:PYTHONUTF8='1'
 $env:PYTHONIOENCODING='utf-8'
 ```
 
-If `agent-pulse` is not on PATH, try running from the project checkout:
+If `agent-pulse` is not on PATH, install the PyPI package or try running from a local project checkout:
+
+```powershell
+pip install agentpulse-cli
+```
 
 ```powershell
 python -m agent_pulse.cli --version
