@@ -38,10 +38,10 @@ The skill expects `agent-pulse` to be installed or importable from a local check
 pip install agent-pulse
 ```
 
-If you are developing from the local Agent Pulse repo:
+If you are developing from a local Agent Pulse checkout:
 
 ```powershell
-cd E:\agent-pulse
+cd path\to\agent-pulse
 pip install -e .
 ```
 
@@ -90,8 +90,10 @@ $env:PYTHONIOENCODING='utf-8'
 
 ## Validation
 
+Run the skill validator from the `skill-creator` skill in your local Codex skills installation:
+
 ```powershell
-python C:\Users\Jane\.codex\skills\.system\skill-creator\scripts\quick_validate.py E:\agent-pulse-skills\agent-pulse
+python path\to\skill-creator\scripts\quick_validate.py path\to\agent-pulse
 ```
 
 Expected result:
