@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Pulse Maintainer"
+  short_description: "Maintain and evolve Agent Pulse"
+  default_prompt: "Use $agent-pulse-maintainer to inspect, modify, and validate the Agent Pulse project."
