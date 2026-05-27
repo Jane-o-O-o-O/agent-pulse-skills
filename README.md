@@ -1,5 +1,7 @@
 # Agent Pulse Skills
 
+[![skills.sh](https://skills.sh/b/Jane-o-O-o-O/agent-pulse-skills)](https://skills.sh/Jane-o-O-o-O/agent-pulse-skills)
+
 Codex skill for using [Agent Pulse](https://github.com/Jane-o-O-o-O/agent-pulse) as a local AI-agent activity dashboard.
 
 This repository contains a usage-focused skill named `agent-pulse`. It helps an agent run the `agent-pulse` CLI, inspect local sessions, summarize token usage, estimate cost, diagnose setup issues, and expose Agent Pulse data through MCP.
@@ -26,29 +28,39 @@ agent-pulse/
 
 ## Install
 
-Clone this repository into your Codex skills directory, or copy the `agent-pulse` folder into your existing skills path.
+Install from GitHub with the skills CLI:
 
-```powershell
-git clone https://github.com/Jane-o-O-o-O/agent-pulse-skills.git
+```bash
+npx skills add Jane-o-O-o-O/agent-pulse-skills
 ```
 
 The skill expects the `agentpulse-cli` Python package to be installed, which provides the `agent-pulse` command.
 
-```powershell
+```bash
 pip install agentpulse-cli
 ```
 
 If you are developing from a local Agent Pulse checkout:
 
-```powershell
-cd path\to\agent-pulse
+```bash
+cd path/to/agent-pulse
 pip install -e .
 ```
 
 After installation, the command to run is still:
 
-```powershell
+```bash
 agent-pulse --version
+```
+
+## Manual Install
+
+You can also clone this repository and install from the local checkout:
+
+```bash
+git clone git@github.com:Jane-o-O-o-O/agent-pulse-skills.git
+cd agent-pulse-skills
+npx skills add .
 ```
 
 ## Example Prompts
@@ -73,8 +85,8 @@ Use $agent-pulse to list the MCP tools Agent Pulse exposes.
 
 The bundled helper runs a compact set of Agent Pulse checks:
 
-```powershell
-python agent-pulse\scripts\run_agent_pulse_snapshot.py
+```bash
+python agent-pulse/scripts/run_agent_pulse_snapshot.py
 ```
 
 It runs:
@@ -96,10 +108,16 @@ $env:PYTHONIOENCODING='utf-8'
 
 ## Validation
 
+List the skills exposed by this repository:
+
+```bash
+npx skills add Jane-o-O-o-O/agent-pulse-skills --list
+```
+
 Run the skill validator from the `skill-creator` skill in your local Codex skills installation:
 
-```powershell
-python path\to\skill-creator\scripts\quick_validate.py path\to\agent-pulse
+```bash
+python path/to/skill-creator/scripts/quick_validate.py path/to/agent-pulse
 ```
 
 Expected result:
