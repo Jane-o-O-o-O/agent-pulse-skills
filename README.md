@@ -1,40 +1,12 @@
 # Agent Pulse Skills
 
 [![skills.sh](https://skills.sh/b/Jane-o-O-o-O/agent-pulse-skills)](https://skills.sh/Jane-o-O-o-O/agent-pulse-skills)
+[![Agent Pulse](https://img.shields.io/badge/skill-agent--pulse-2563eb)](agent-pulse/SKILL.md)
+[![Package](https://img.shields.io/badge/package-agentpulse--cli-0f766e)](https://pypi.org/project/agentpulse-cli/)
 
-Codex skill for using [Agent Pulse](https://github.com/Jane-o-O-o-O/agent-pulse) as a local AI-agent activity, token, and cost dashboard.
+Codex skill for using [Agent Pulse](https://github.com/Jane-o-O-o-O/agent-pulse) to inspect local AI-agent sessions, token usage, model costs, health, reports, and MCP tools.
 
-## What This Skill Does
-
-This repository contains a usage-focused skill named `agent-pulse`. It guides an agent to run the `agent-pulse` CLI, prefer JSON output, interpret local usage data, diagnose setup issues, and expose Agent Pulse data through reports, APIs, metrics, or MCP when requested.
-
-The skill is intentionally an agent operating guide. It should not be treated as project documentation or a product roadmap.
-
-## Source Keys
-
-```text
-hermes, claude, codex, deepseek, openclaw, copilot, aider, qwen,
-opencode, goose, cursor, antigravity, amp
-```
-
-## Agent Workflows
-
-- Use `status`, `top`, `models`, and the root dashboard command for usage summaries.
-- Use `budget`, `alerts`, `health`, `anomaly`, `forecast`, and `score` for spending and risk checks.
-- Use `history`, `timeline`, `heatmap`, `compare`, `compare-projects`, `leaderboard`, `diff`, `search`, `insights`, and `snapshot` for analysis.
-- Use `report`, `export`, `export-html`, `metrics`, `web`, `api`, and `mcp` for sharing or integration.
-- Use `doctor`, `scan`, `config`, `themes`, `completions`, `plugins`, `frameworks`, `demo`, and `tui` for setup, discovery, and local operation.
-
-## Included Skill
-
-```text
-agent-pulse/
-|-- SKILL.md
-|-- agents/
-|   `-- openai.yaml
-`-- scripts/
-    `-- run_agent_pulse_snapshot.py
-```
+This repository is a skill package. The actual Agent operating guide lives in [`agent-pulse/SKILL.md`](agent-pulse/SKILL.md).
 
 ## Install
 
@@ -44,7 +16,23 @@ Install from GitHub with the skills CLI:
 npx skills add Jane-o-O-o-O/agent-pulse-skills
 ```
 
-The skill expects the `agentpulse-cli` Python package to be installed:
+List the skills exposed by this repository:
+
+```bash
+npx skills add Jane-o-O-o-O/agent-pulse-skills --list
+```
+
+Manual local install:
+
+```bash
+git clone git@github.com:Jane-o-O-o-O/agent-pulse-skills.git
+cd agent-pulse-skills
+npx skills add .
+```
+
+## Runtime Requirement
+
+The skill tells an agent how to use Agent Pulse, but the `agent-pulse` CLI must be installed separately:
 
 ```bash
 pip install agentpulse-cli
@@ -59,14 +47,23 @@ pip install -e ".[web]"
 agent-pulse --version
 ```
 
-## Manual Install
+## What Agents Use It For
 
-You can also clone this repository and install from the local checkout:
+| User asks about | Agent Pulse commands the skill points to |
+| --- | --- |
+| Recent usage | `status`, `top`, root dashboard JSON |
+| Sessions and search | `session`, `search`, `diff`, `snapshot` |
+| Models and cost | `models`, `leaderboard`, `optimize`, `budget` |
+| Risk and health | `alerts`, `health`, `anomaly`, `forecast`, `score` |
+| Trends and comparisons | `history`, `timeline`, `heatmap`, `compare`, `compare-projects`, `insights` |
+| Sharing and integration | `report`, `export`, `export-html`, `metrics`, `web`, `api`, `mcp` |
+| Setup and discovery | `doctor`, `scan`, `config`, `plugins`, `frameworks`, `completions` |
 
-```bash
-git clone git@github.com:Jane-o-O-o-O/agent-pulse-skills.git
-cd agent-pulse-skills
-npx skills add .
+Supported source keys for `-P/--platform`:
+
+```text
+hermes, claude, codex, deepseek, openclaw, copilot, aider, qwen,
+opencode, goose, cursor, antigravity, amp
 ```
 
 ## Example Prompts
@@ -91,19 +88,28 @@ Use $agent-pulse to compare Codex and Claude activity over the last 7 days.
 Use $agent-pulse to list the MCP tools Agent Pulse exposes.
 ```
 
-## Snapshot Helper
+## Included Files
 
-The bundled helper runs a compact set of Agent Pulse checks:
+```text
+agent-pulse/
+|-- SKILL.md
+|-- agents/
+|   `-- openai.yaml
+`-- scripts/
+    `-- run_agent_pulse_snapshot.py
+```
+
+The helper script runs a compact JSON-friendly snapshot:
 
 ```bash
 python agent-pulse/scripts/run_agent_pulse_snapshot.py --hours 24 --days 7
 ```
 
-It runs JSON-friendly checks for diagnosis, current status, top cost sessions, model analytics, leaderboard, forecast, health, score, budget, and insights.
+It gathers diagnosis, current status, top cost sessions, model analytics, leaderboard, forecast, health, score, budget, and insights. Each subcommand has its own timeout so one slow local scan does not block the whole snapshot.
 
 ## Windows Notes
 
-Agent Pulse prints emoji and box-drawing characters. On Windows, use UTF-8 output for reliable command execution:
+Agent Pulse prints emoji and box-drawing characters. Use UTF-8 output for reliable command execution:
 
 ```powershell
 $env:PYTHONUTF8='1'
@@ -112,13 +118,7 @@ $env:PYTHONIOENCODING='utf-8'
 
 ## Validation
 
-List the skills exposed by this repository:
-
-```bash
-npx skills add Jane-o-O-o-O/agent-pulse-skills --list
-```
-
-Run the skill validator from the `skill-creator` skill in your local Codex skills installation:
+Run the skill validator from the `skill-creator` skill:
 
 ```bash
 python path/to/skill-creator/scripts/quick_validate.py path/to/agent-pulse
